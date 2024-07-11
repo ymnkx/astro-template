@@ -5,20 +5,20 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
     "build": "astro build && npm run format",
     "format": "prettier --write 'dist/**/*.html'",
     "preview": "astro preview",
-    "astro": "astro",
     "lint": "eslint src/ --ext .astro,.ts",
     "file:build": "astro build && npm run file:format && npm run file:copy && npm run file:list",
     "file:format": "prettier --write 'dist/**/*.html'",
     "file:copy": "node 'scripts/copyDirectory.js'",
     "file:list": "node 'scripts/makeFileList.js'",
-    "svgsprite": "node 'scripts/svgSprite.js'"
+    "svgsprite": "node 'scripts/svgSprite.js'",
+    "preinstall": "node scripts/initialSetting.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.2",
+    "@inquirer/prompts": "^5.1.2",
     "@splidejs/splide": "^4.1.4",
     "@types/fs-extra": "^11.0.4",
     "astro": "^4.11.5",

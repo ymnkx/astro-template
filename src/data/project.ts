@@ -1,6 +1,6 @@
 const data = {
-  siteName: 'Astro Template',
-  siteDescription: 'Astro Template Description',
+  siteName: 'TITLE',
+  siteDescription: 'Description',
   siteUrl: 'https://example.com/',
   baseUrl: '/', // ex: '/', '/sample/'
   publicDir: './public/',
