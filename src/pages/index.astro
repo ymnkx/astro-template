@@ -1,0 +1,20 @@
+---
+import SampleButton from '@/components/Sample/SampleButton.astro';
+import SampleIcon from '@/components/Sample/SampleIcon.astro';
+import SampleImage from '@/components/Sample/SampleImage.astro';
+import BaseLayout from '@/layouts/base.astro';
+import HeadingH2 from '@/components/Heading/HeadingH2.astro';
+import PageTitle from '@/components/PageTitle/PageTitle.astro';
+const title = '';
+const description = '';
+---
+
+<BaseLayout title={title} description={description}>
+  <PageTitle label="Top Page" />
+  <HeadingH2 label="Button" />
+  <SampleButton />
+  <HeadingH2 label="Icon" />
+  <SampleIcon />
+  <HeadingH2 label="Image" />
+  <SampleImage />
+</BaseLayout>

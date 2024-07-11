@@ -1,0 +1,159 @@
+---
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<div class="global-navigation" id="js-global-navigation">
+  <div class="global-navigation_bg" aria-hidden="true" data-role="bg"></div>
+  <button class="global-navigation_control" type="button" aria-label="menu" aria-expanded="false" data-role="control">
+    <span class="global-navigation_open">menu</span>
+    <span class="global-navigation_close">close</span>
+  </button>
+  <ul class="global-navigation_list" aria-hidden="false" data-role="navi">
+    {
+      [
+        { href: `${baseUrl}`, label: 'Home' },
+        { href: `${baseUrl}about/`, label: 'About' },
+        { href: `${baseUrl}contact/`, label: 'Contact' },
+      ].map((item) => (
+        <li>
+          <a href={item.href} class="global-navigation_link" aria-current={Astro.url.pathname === item.href}>
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <button class="global-navigation_trap" type="button" data-role="trap" aria-label="global navigation trap"></button>
+</div>
+
+<style lang="scss">
+  .global-navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    &.-disabled {
+      position: relative;
+      width: auto;
+    }
+
+    a[aria-current='true'] {
+      text-decoration: none;
+      pointer-events: none;
+    }
+  }
+
+  .global-navigation_bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vi;
+    height: 100vh;
+    background-color: rgb(255 255 255 / 90%);
+    backdrop-filter: blur(10px);
+
+    &[aria-hidden='true'] {
+      display: none;
+    }
+
+    .global-navigation.-disabled & {
+      display: none;
+    }
+  }
+
+  .global-navigation_list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 100vi;
+    height: 100vh;
+    pointer-events: none;
+
+    &[aria-hidden='true'] {
+      display: none;
+    }
+
+    .global-navigation.-disabled & {
+      flex-direction: row;
+      justify-content: initial;
+      width: auto;
+      height: auto;
+    }
+
+    & a {
+      pointer-events: visible;
+    }
+  }
+
+  .global-navigation_control {
+    position: absolute;
+    top: 0;
+    right: var(--space-inline);
+    padding-block: 0.5lh;
+
+    .global-navigation.-disabled & {
+      display: none;
+    }
+  }
+
+  .global-navigation_open {
+    .global-navigation_control[aria-expanded='true'] & {
+      display: none;
+    }
+  }
+
+  .global-navigation_close {
+    .global-navigation_control[aria-expanded='false'] & {
+      display: none;
+    }
+  }
+
+  .global-navigation_trap {
+    width: 0;
+    height: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+
+    .global-navigation.-disabled & {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { matchMediaController } from '@/scripts/matchMediaController';
+  import { GlobalNavigationCore } from './GlobalNavigationCore';
+
+  const selector = '#js-global-navigation';
+  const target = document.querySelector(selector);
+  const breakpoint = '40em';
+
+  const globalNavi = GlobalNavigationCore();
+  globalNavi.init({ element: target });
+
+  if (breakpoint) {
+    matchMediaController().init({
+      condition: '(min-width: ' + breakpoint + ')',
+      callback: (match) => {
+        globalNavi?.disabled(match);
+      },
+    });
+  }
+
+  window.addEventListener(
+    'keydown',
+    (event) => {
+      if (event.defaultPrevented) return;
+      if (event.key === 'Esc' || event.key === 'Escape') {
+        event.preventDefault();
+        globalNavi.escapeClose();
+      }
+    },
+    true
+  );
+</script>

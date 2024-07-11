@@ -1,0 +1,36 @@
+---
+import SimpleButton from '@/components/SimpleButton/SimpleButton.astro';
+---
+
+<ul class="sample-button">
+  <li class="sample-button_item">
+    <SimpleButton label="Small" size="small" />
+  </li>
+  <li class="sample-button_item">
+    <SimpleButton label="Medium" size="medium" />
+  </li>
+  <li class="sample-button_item">
+    <SimpleButton label="Medium:A" size="medium" tag="a" />
+  </li>
+  <li class="sample-button_item">
+    <SimpleButton label="Large" size="large" />
+  </li>
+  <li class="sample-button_item -full">
+    <SimpleButton label="Full" size="full" tag="a" />
+  </li>
+</ul>
+
+<style>
+  .sample-button {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-block-start: 0.5rlh;
+  }
+
+  .sample-button_item {
+    &.-full {
+      flex: 1;
+    }
+  }
+</style>

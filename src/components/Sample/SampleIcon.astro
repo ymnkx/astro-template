@@ -1,0 +1,27 @@
+---
+import SvgIcon from '@/components/SvgIcon/SvgIcon.astro';
+---
+
+<ul class="sample-icon">
+  {
+    ['check', 'chevron-right', 'x-mark'].map((name) => (
+      <li>
+        <SvgIcon name={name} />
+      </li>
+    ))
+  }
+</ul>
+
+<style lang="scss">
+  .sample-icon {
+    display: flex;
+    gap: 1rem;
+    margin-block-start: 0.5rlh;
+
+    & > li {
+      width: 2rem;
+      height: 2rem;
+      color: var(--color-primary);
+    }
+  }
+</style>
