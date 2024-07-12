@@ -1,3 +1,8 @@
+---
+import projectData from '@/data/project.ts';
+const { siteName } = projectData;
+---
+
 <footer class="common-footer">
   <div class="common-footer_inner">
     <ul class="common-footer_left">
@@ -9,7 +14,7 @@
       </li>
     </ul>
     <div class="common-footer_copy">
-      <div>&copy;{new Date().getFullYear()} astro-template</div>
+      <div>&copy;{new Date().getFullYear()} {siteName}</div>
     </div>
     <div class="common-footer_right"></div>
   </div>
