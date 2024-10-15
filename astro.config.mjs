@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 
 import d from './src/data/project.ts';
-const { url, publicDir, baseUrl } = d;
+const { siteUrl, publicDir, baseUrl } = d;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,7 +13,7 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: url,
+  site: siteUrl,
   base: baseUrl,
   trailingSlash: 'always',
   outDir: `./dist${baseUrl}`,
